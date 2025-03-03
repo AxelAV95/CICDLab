@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app-cicd
+  labels:
+    app: simple-app-cicd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-app-cicd
+  template:
+    metadata:
+      labels:
+        app: simple-app-cicd
+    spec:
+      containers:
+      - name: simple-app-cicd
+        image: axelav95/ultimate-cicd:replaceImageTag
+        ports:
+        - containerPort: 8080
