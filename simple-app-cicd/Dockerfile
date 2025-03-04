@@ -24,3 +24,4 @@ EXPOSE 8080
 
 # Run the application
 CMD ["java", "-jar", "target/simple-app-cicd-0.0.1-SNAPSHOT.jar"]
+
