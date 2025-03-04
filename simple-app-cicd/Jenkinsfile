@@ -8,7 +8,7 @@ pipeline {
 
   tools {
         jdk 'JDK17' // Nombre del JDK configurado en Global Tool Configuration
-        maven 'Maven' // Asegúrate de que también tengas Maven configurado
+       
     }
   // tools {
   //       jdk 'Java 17'  // Asegúrate de que 'Java 17' sea el nombre que configuraste en Jenkins
