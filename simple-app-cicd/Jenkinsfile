@@ -6,74 +6,65 @@ pipeline {
     }
   }
 
-  // tools {
-  //       jdk 'JDK17' // Nombre que diste en Global Tool Configuration
-      
-  //   }
-
-  // environment {
-  //       JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-  //       PATH = "${JAVA_HOME}/bin:${env.PATH}"
-  //   }
-  // tools {
-  //       jdk 'Java 17'  // Asegúrate de que 'Java 17' sea el nombre que configuraste en Jenkins
-  // }
-  //  environment {
-  //       JAVA_HOME = tool 'Java 17'
-  //   }
   stages {
 
-    stage('Check Java Version') {
+    stage('Verificar versión de Java') {
             steps {
                 sh 'echo $JAVA_HOME'
                 sh 'java -version'
             }
+    }
+
+    stage('Configurar directorio seguro') {
+            steps {
+                script {
+                    // Añadir el directorio de trabajo a los directorios seguros
+                    sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/CICD'
+                }
+            }
         }
     
     stage('Checkout') {
-      steps {
-        sh 'echo passed'
-        sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/CICD'
-        sh 'git status'
-        
+      steps {                
+        sh 'git status'    
         //git branch: 'main', url: 'https://github.com/AxelAV95/CICDLab.git'
         git credentialsId: 'github', branch: 'main', url: 'https://github.com/AxelAV95/CICDLab.git'
       }
     }
-    // stage('Build and Test') {
-    //   steps {
-    //     sh 'ls -ltr'       
-    //     // build the project and create a JAR file
-    //     sh 'cd simple-app-cicd && mvn clean package'
-    //   }
-    // }
-    // stage('Static Code Analysis') {
-    //   environment {
-    //     SONAR_URL = "http://34.30.176.213:9000"
-    //   }
-    //   steps {
-    //     withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-    //       sh 'cd simple-app-cicd && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-    //     }
-    //   }
-    // }
-    // stage('Build and Push Docker Image') {
-    //   environment {
-    //     DOCKER_IMAGE = "axelav95/ultimate-cicd:${BUILD_NUMBER}"
-    //     // DOCKERFILE_LOCATION = "CICDLab/simple-app-cicd/Dockerfile"
-    //     REGISTRY_CREDENTIALS = credentials('docker-cred')
-    //   }
-    //   steps {
-    //     script {
-    //         sh 'cd simple-app-cicd && docker build -t ${DOCKER_IMAGE} .'
-    //         def dockerImage = docker.image("${DOCKER_IMAGE}")
-    //         docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
-    //             dockerImage.push()
-    //         }
-    //     }
-    //   }
-    // }
-    stage('Update Deployment File') {
+    stage('Construir y hacer testing') {
+      steps {
+        sh 'ls -ltr'       
+        // build the project and create a JAR file
+        sh 'cd simple-app-cicd && mvn clean package'
+      }
+    }
+    stage('Análisis de código') {
+      environment {
+        SONAR_URL = "http://34.30.176.213:9000"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'cd simple-app-cicd && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+    }
+    stage('Construir y subir imagen de Docker') {
+      environment {
+        DOCKER_IMAGE = "axelav95/ultimate-cicd:${BUILD_NUMBER}"
+        // DOCKERFILE_LOCATION = "CICDLab/simple-app-cicd/Dockerfile"
+        REGISTRY_CREDENTIALS = credentials('docker-cred')
+      }
+      steps {
+        script {
+            sh 'cd simple-app-cicd && docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                dockerImage.push()
+            }
+        }
+      }
+    }
+    stage('Actualizar archivos de despliegue') {
         environment {
             GIT_REPO_NAME = "CICDLab"
             GIT_USER_NAME = "AxelAV95"
