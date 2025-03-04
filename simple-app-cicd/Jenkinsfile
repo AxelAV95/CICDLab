@@ -80,8 +80,8 @@ pipeline {
                     git config user.email "villalobos.axel@yahoo.es"
                     git config user.name "AxelAV95"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" CICDLab/simple-app-cicd-manifests/deployment.yml
-                    git add CICDLab/simple-app-cicd-manifests/deployment.yml
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" simple-app-cicd-manifests/deployment.yml
+                    git add simple-app-cicd-manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
