@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: simple-app-cicd
-        image: axelav95/ultimate-cicd:7
+        image: axelav95/ultimate-cicd:replaceImageTag
         ports:
         - containerPort: 8080
