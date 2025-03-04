@@ -34,6 +34,7 @@ pipeline {
       steps {
         sh 'echo passed'
         //git branch: 'main', url: 'https://github.com/AxelAV95/CICDLab.git'
+        git credentialsId: 'github', branch: 'main', url: 'https://github.com/AxelAV95/CICDLab.git'
       }
     }
     stage('Build and Test') {
