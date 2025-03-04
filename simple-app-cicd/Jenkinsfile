@@ -5,12 +5,12 @@ pipeline {
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
-  tools {
-        jdk 'Java 17'  // Asegúrate de que 'Java 17' sea el nombre que configuraste en Jenkins
-  }
-   environment {
-        JAVA_HOME = tool 'Java 17'
-    }
+  // tools {
+  //       jdk 'Java 17'  // Asegúrate de que 'Java 17' sea el nombre que configuraste en Jenkins
+  // }
+  //  environment {
+  //       JAVA_HOME = tool 'Java 17'
+  //   }
   stages {
 
     stage('Check Java Version') {
