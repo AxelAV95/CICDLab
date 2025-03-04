@@ -68,10 +68,9 @@ Ejemplo de salida: `d87d33c0defc406997049c500241af00`
 ### Agregar el Token como credencial en Jenkins
 1. Accede al panel de Jenkins.
 2. Navega a **Manage Jenkins** > **Manage Credentials** > **(global)** > **Add Credentials**.
-3. Selecciona **Username with password** como tipo de credencial.
-4. En **Username**, ingresa tu nombre de usuario de GitHub.
-5. En **Password**, pega el Token de Acceso Personal que generaste.
-6. Asigna un ID único a la credencial: `github`.
+3. Selecciona **Secret text** como tipo de credencial.
+4. Agrega el token
+5. Asigna un ID único a la credencial: `github`.
 
 ## Instalar el plugin Docker Pipelines en Jenkins
 1. Ve a **Administrar Jenkins** > **Plugins** > **Available plugins**.
