@@ -112,6 +112,5 @@ cd sonarqube-9.4.0.54424/bin/linux-x86-64/
 - **URL**: `IPPUBLICA:9000`
 - **Usuario**: `admin`
 - **Contraseña inicial**: `admin` (cámbiala tras el primer inicio de sesión).
-```
 
-Este archivo `README.md` está organizado con secciones claras, bloques de código en formato Markdown y pasos numerados donde aplica. Puedes copiarlo directamente a un archivo con extensión `.md` y usarlo como guía en un repositorio o documentación.
+
