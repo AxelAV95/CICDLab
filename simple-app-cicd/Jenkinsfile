@@ -6,10 +6,15 @@ pipeline {
     }
   }
 
-  environment {
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+  tools {
+        jdk 'JDK17' // Nombre que diste en Global Tool Configuration
+      
     }
+
+  // environment {
+  //       JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+  //       PATH = "${JAVA_HOME}/bin:${env.PATH}"
+  //   }
   // tools {
   //       jdk 'Java 17'  // Asegúrate de que 'Java 17' sea el nombre que configuraste en Jenkins
   // }
