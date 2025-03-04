@@ -1,5 +1,5 @@
 # Usa una imagen base con Maven y OpenJDK 17
-FROM maven:3-openjdk-17
+FROM maven:3-openjdk-17-slim
 
 # Actualiza los paquetes e instala Docker
 RUN apt-get update && apt-get install -y docker.io
