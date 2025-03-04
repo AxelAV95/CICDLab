@@ -16,7 +16,7 @@ pipeline {
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
-        sh 'cd CICDLab/simple-app-cicd && mvn clean package'
+        sh 'cd simple-app-cicd && mvn clean package'
       }
     }
     stage('Static Code Analysis') {
