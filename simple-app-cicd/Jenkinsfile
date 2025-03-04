@@ -33,6 +33,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
+        sh 'git status'
         //git branch: 'main', url: 'https://github.com/AxelAV95/CICDLab.git'
         git credentialsId: 'github', branch: 'main', url: 'https://github.com/AxelAV95/CICDLab.git'
       }
