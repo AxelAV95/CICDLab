@@ -100,6 +100,7 @@ systemctl restart docker
 ```bash
 apt install unzip
 adduser sonarqube
+sudo su - sonarqube
 wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.4.0.54424.zip
 unzip *
 chmod -R 755 /home/sonarqube/sonarqube-9.4.0.54424
